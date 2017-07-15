@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>斐波那契查找</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			window.onload = function(){
+				// arr = [10,3,98,35,13,4,25,37,80,58,42];
+            	var arr = [3,4,10,13,25,35,37,42,58,80,98];    // 数组通常是有序的
+            	var key = 42;
+
+            	var result = fibonacciSearch(arr,key);
+            	if(result){
+            		console.log('查找成功，关键值在数组中的第' + result + '个位置');
+            	}else{
+            		console.log('查找失败！');
+            	}
+
+
+            	// 利用斐波那契数列
+            	function fibonacciSearch(arr,key){
+            		arr.unshift(0);
+            		var len = arr.length;
+
+            		// 根据被查找数组的长度，自动生成一个相同长度的斐波那契数列
+            		var F = new Array();
+            		F[0] = 0;F[1] = 1;
+            		for(var i = 2; i < len; i ++){
+            			F[i] = F[i-2] + F[i-1];
+            		}
+                    
+                    var n = len - 1;   // 原数组的长度
+                    var low = 1, high = n, mid = 0;
+                    var k = 0;    // 用于标记斐波那契数列的索引
+
+                    // 计算出原数组长度n位于斐波那契数列中的位置
+                    while(n > F[k]){
+                    	k ++;
+                    }
+
+                    // 将不满的数值,用数组的最后一个数补齐
+                    for(var j = n; j < F[k]; j ++){
+                    	arr[j] = arr[n];
+                    }
+
+                    while(low <= high){
+                    	mid = low + F[k-1] -1;
+                    	// 如果关键字在左半部分
+                    	if(key < arr[mid]){
+                    		high = mid - 1;
+                    		k = k - 1;
+                    	}
+                    	// 如果关键字在右半部分
+                    	else if(key > arr[mid]){
+                    		low = mid + 1;
+                    		k = k - 2;
+                    	}
+                    	else{
+                    		// 若mid<=n,则说明mid就是查找到的位置
+                    		if(mid <= n){
+                    			return mid;
+                    		}
+                    		// 若mid>n,则说明是补全的数组，则返回n
+                    		else{
+                    			return n;
+                    		}
+                    	}
+                    }
+                    return 0;
+            	}
+			}
+		</script>
+	</body>
+</html>

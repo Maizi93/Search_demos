@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>顺序表查找优化</title>
+	</head>
+    <body>
+    	<script type="text/javascript">
+            window.onload = function(){
+            	var arr = [10,3,98,35,13,4,25,37,80,58,42];
+            	var key = 4;
+            	var result = sequentialSearch2(arr,key);
+            	if(result){
+            		console.log('查找成功，关键值在数组中的第' + result + '个位置');
+            	}else{
+            		console.log('查找失败！');
+            	}
+
+
+            	function sequentialSearch2(arr,key){
+            		// 设置一个"哨兵"，则每次不需要判断i是否越界，直接与"哨兵"进行比较即可
+            		arr.unshift(key);
+            		var len = arr.length;
+            		var i = len - 1;
+            		while(arr[i] != arr[0]){
+            			i --;
+            		}
+            		return i;
+            	}
+            }
+    	</script>
+    </body>
+</html>

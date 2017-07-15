@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>折半查找</title>
+	</head>
+    <body>
+    	<script type="text/javascript">
+            window.onload = function(){
+            	// arr = [10,3,98,35,13,4,25,37,80,58,42];
+            	var arr = [3,4,10,13,25,35,37,42,58,80,98];    // 数组通常是有序的
+            	var key = 42;
+
+            	var result = binarySearch(arr,key);
+            	if(result){
+            		console.log('查找成功，关键值在数组中的第' + result + '个位置');
+            	}else{
+            		console.log('查找失败！');
+            	}
+
+
+            	function binarySearch(arr,key){
+            		arr.unshift(0);
+            		var len = arr.length;
+            		var low = 1, high = len - 1;
+            		var mid = 0;
+            		while(low <= high){
+            			mid = Math.floor((low+high)/2);
+                        // 如果关键字在左半部分
+            			if(key < arr[mid]){
+            				high = mid - 1;
+            			}
+                        // 如果关键字在右半部分
+                        else if(key > arr[mid]){
+            				low = mid + 1;
+            			}
+                        else{
+            				return mid;
+            			}
+            		}
+            		return 0;
+            	}
+            }
+    	</script>
+    </body>
+</html>

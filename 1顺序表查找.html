@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>顺序表查找: Sequential Search</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+            window.onload = function(){
+            	var arr = [10,3,98,35,13,4,25,37,80,58,42];
+            	var key = 25;
+            	var result = sequentialSearch(arr,key);
+            	if(result){
+            		console.log('查找成功，关键值在数组中的第' + result + '个位置');
+            	}else{
+            		console.log('查找失败！');
+            	}
+
+                // 每次需要判断i是否越界
+            	function sequentialSearch(arr,key){
+            		arr.unshift(0);
+            		var len = arr.length;
+            		for(var i = 1; i < len; i ++){
+            			if(key == arr[i]){
+            				return i;
+            			}
+            		}
+            		return 0;
+            	}
+
+            }
+		</script>
+	</body>
+</html>
